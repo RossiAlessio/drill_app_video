@@ -31,6 +31,9 @@ def load_images_async(urls):
 # Define the authenticate function
 def authenticate(username, password):
     if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
+
+        st.empty()
+        
         # Frontend
         if 'title' not in st.session_state:
             title = '<h1 style="font-size: 42px;">Drills library</h1>'
@@ -112,17 +115,13 @@ def authenticate(username, password):
 
 
 def main():
-    st.title("Login App")
+    # Display login form
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    login_button = st.button("Login")
     
-    # Check if the user is already logged in
-    if 'logged_in' not in st.session_state or not st.session_state['logged_in']:
-        # Display login form
-        username = st.text_input("Username")
-        password = st.text_input("Password", type="password")
-        login_button = st.button("Login")
-        
-        if login_button:
-            authenticate(username, password)
+    if login_button:
+        authenticate(username, password)
     else:
         # User is already logged in, display the app
         authenticate(st.session_state['username'], st.session_state['password'])
