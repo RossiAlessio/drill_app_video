@@ -73,14 +73,10 @@ def authenticate(username, password):
         st.success('Update files...Done!')
         
         
-        # # settings sidebar
-        # with st.sidebar:
-        #     st.markdown('SETTING')
-        #     if st.button('Upload google drive links'):
-        #         upload_file_link()
+        # Hide login form after successful login
+        st.empty()
         
-        
-        
+        # Display the drill library
         option = st.selectbox('Seleziona una categoria',[' '] + list(st.session_state['fold_names']))
         if option != ' ':
             try:
