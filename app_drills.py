@@ -35,7 +35,7 @@ def load_images_async(urls):
 
 # upload links file
 with st.spinner('Update files...'):
-    dct_files = json.load(open('drive_links.json'))
+    dct_files = json.load(open('./drive_links.json'))
     if 'fold_names' not in st.session_state:
         folds = dct_files.keys()
         st.session_state['fold_names'] = folds
