@@ -4,10 +4,12 @@ from glob import glob
 from io import BytesIO
 from link_drive import upload_file_link
 from concurrent.futures import ThreadPoolExecutor
-# from stqdm import stqdm
 import json
 import requests
 st.set_page_config(layout="wide",initial_sidebar_state='collapsed')
+
+# Define hardcoded user credentials
+USER_CREDENTIALS = {"marcello": "drill2024", "alessio": "admin2024"}
 
 # Function to load image from Drive without resizing
 def load_image(url):
@@ -26,17 +28,7 @@ def load_images_async(urls):
             images.append(future.result())
     return images
 
-# Define hardcoded user credentials
-USER_CREDENTIALS = {"marcello": "drill2024", "alessio": "admin2024"}
-
-# Display login form
-username = st.text_input("Username")
-password = st.text_input("Password", type="password")
-login_button = st.button("Login")
-
-if login_button:
-    authenticate(username, password)
-
+# Define the authenticate function
 def authenticate(username, password):
     if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
         # Frontend
@@ -127,6 +119,16 @@ def authenticate(username, password):
         st.error("Invalid username or password")
 
 
+def main():
+    st.title("Login App")
+    
+    # Display login form
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    login_button = st.button("Login")
+    
+    if login_button:
+        authenticate(username, password)
 
-
-
+if __name__ == "__main__":
+    main()
