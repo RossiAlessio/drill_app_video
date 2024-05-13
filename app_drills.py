@@ -7,8 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 from stqdm import stqdm
 import json
 import requests
-st.set_page_config(layout="wide",initial_sidebar_state='collapsed')ardcoded user credentials
-        
+st.set_page_config(layout="wide",initial_sidebar_state='collapsed')        
 
 # Frontend
 if 'title' not in st.session_state:
