@@ -78,31 +78,34 @@ st.success('Update files...Done!')
 
 option = st.selectbox('Seleziona una categoria',[' '] + list(st.session_state['fold_names']))
 if option != ' ':
-    lst_drill = list(st.session_state[option].keys())
-    
-    c1,c2,c3,c4,c5 = st.columns(5)
-    n_rows = int(len(st.session_state[option])/5)+1
-    cols_order = [c1,c2,c3,c4,c5]*n_rows
-    
-    lst_zip = []
-    startN = 0
-    for row in range(n_rows):
+    try:
+        lst_drill = list(st.session_state[option].keys())
+        
         c1,c2,c3,c4,c5 = st.columns(5)
-        values = dict( ((key, st.session_state[option][key]) for key in lst_drill[startN:startN+5]) )
-        lst_zip.append([values,[c1,c2,c3,c4,c5]])
-        startN += 5
-
-    for vals,cols in lst_zip:
-        with st.container():
-            for i,col in zip(vals,cols): 
-                with col:
-                    st.divider()
-                    st.markdown(i)
-                    try:
-                        st.image(vals[i]['loaded_image'], use_column_width=True)
-                    except:
-                        st.write('NO IMAGE')
-                    try:
-                        st.link_button("Go to video", vals[i]['url_video'])
-                    except:
-                        st.write('NO VIDEO')
+        n_rows = int(len(st.session_state[option])/5)+1
+        cols_order = [c1,c2,c3,c4,c5]*n_rows
+        
+        lst_zip = []
+        startN = 0
+        for row in range(n_rows):
+            c1,c2,c3,c4,c5 = st.columns(5)
+            values = dict( ((key, st.session_state[option][key]) for key in lst_drill[startN:startN+5]) )
+            lst_zip.append([values,[c1,c2,c3,c4,c5]])
+            startN += 5
+    
+        for vals,cols in lst_zip:
+            with st.container():
+                for i,col in zip(vals,cols): 
+                    with col:
+                        st.divider()
+                        st.markdown(i)
+                        try:
+                            st.image(vals[i]['loaded_image'], use_column_width=True)
+                        except:
+                            st.write('NO IMAGE')
+                        try:
+                            st.link_button("Go to video", vals[i]['url_video'])
+                        except:
+                            st.write('NO VIDEO')
+    except:
+        pass
