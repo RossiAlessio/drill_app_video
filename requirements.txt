@@ -3,4 +3,4 @@ glob2==0.7
 streamlit==1.32.2
 google-auth 
 google-auth-oauthlib
-tqdm
+stqdm

@@ -4,7 +4,7 @@ from glob import glob
 from io import BytesIO
 from link_drive import upload_file_link
 from concurrent.futures import ThreadPoolExecutor
-from tqdm import tqdm
+from stqdm import stqdm
 import json
 import requests
 st.set_page_config(layout="wide",initial_sidebar_state='collapsed')
@@ -29,7 +29,7 @@ def load_images_async(urls):
         # Submit each URL for downloading and loading
         futures = [executor.submit(load_image, url) for url in urls]
         # Get the results
-        for future in tqdm(futures):
+        for future in stqdm(futures):
             images.append(future.result())
     return images
 
@@ -40,7 +40,7 @@ with st.spinner('Update files...'):
         folds = dct_files.keys()
         st.session_state['fold_names'] = folds
     
-        for fold in tqdm(folds):
+        for fold in stqdm(folds):
             st.session_state[fold] = {}
             urls = []
             for drill in dct_files[fold]:
