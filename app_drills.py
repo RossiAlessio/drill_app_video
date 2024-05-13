@@ -72,10 +72,6 @@ def authenticate(username, password):
                             
         st.success('Update files...Done!')
         
-        
-        # Hide login form after successful login
-        st.empty()
-        
         # Display the drill library
         option = st.selectbox('Seleziona una categoria',[' '] + list(st.session_state['fold_names']))
         if option != ' ':
@@ -118,13 +114,18 @@ def authenticate(username, password):
 def main():
     st.title("Login App")
     
-    # Display login form
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    login_button = st.button("Login")
-    
-    if login_button:
-        authenticate(username, password)
+    # Check if the user is already logged in
+    if 'logged_in' not in st.session_state or not st.session_state['logged_in']:
+        # Display login form
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        login_button = st.button("Login")
+        
+        if login_button:
+            authenticate(username, password)
+    else:
+        # User is already logged in, display the app
+        authenticate(st.session_state['username'], st.session_state['password'])
 
 if __name__ == "__main__":
     main()
