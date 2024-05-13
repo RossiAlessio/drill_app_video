@@ -33,7 +33,6 @@ def authenticate(username, password):
     if username in USER_CREDENTIALS and USER_CREDENTIALS[username] == password:
 
         st.empty()
-        
         # Frontend
         if 'title' not in st.session_state:
             title = '<h1 style="font-size: 42px;">Drills library</h1>'
@@ -122,9 +121,6 @@ def main():
     
     if login_button:
         authenticate(username, password)
-    else:
-        # User is already logged in, display the app
-        authenticate(st.session_state['username'], st.session_state['password'])
 
 if __name__ == "__main__":
     main()
