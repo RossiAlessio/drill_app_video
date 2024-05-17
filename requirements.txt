@@ -4,3 +4,4 @@ streamlit==1.32.2
 google-auth 
 google-auth-oauthlib
 stqdm
+google-api-python-client
